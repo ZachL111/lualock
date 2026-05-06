@@ -1,0 +1,17 @@
+{
+  "repo": "lualock",
+  "thresholds": {
+    "signal": 4,
+    "slack": 1,
+    "confidence": 1,
+    "drag": 5,
+    "ship": 167,
+    "watch": 97
+  },
+  "terms": [
+    "capability width",
+    "resource pressure",
+    "plugin drift",
+    "escape risk"
+  ]
+}
