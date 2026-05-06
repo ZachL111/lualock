@@ -1,68 +1,40 @@
 # lualock
 
-`lualock` packages a practical sandbox exercise in Lua. The emphasis is on deterministic behavior, a small public API, and examples that explain the tradeoffs.
+`lualock` is a compact Lua repository for sandbox, centered on this goal: Run capability-filtered plugins with deterministic resource policy checks.
 
-## How I Read Lualock
+## Why I Keep It Small
 
-The useful thing to inspect here is how the same score rule is represented in code, metadata, and examples. If those three pieces disagree, the audit script should make the drift visible.
+This is intentionally local and self-contained so it can be inspected without credentials, services, or seeded history.
 
-## Problem Shape
+## Lualock Review Notes
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+For a quick review, compare `plugin drift` with `escape risk` before reading the middle cases.
+
+## Included Behavior
+
+- `fixtures/domain_review.csv` adds cases for capability width and resource pressure.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/lualock-walkthrough.md` walks through the case spread.
+- The Lua code includes a review path for `plugin drift` and `escape risk`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
 ## Internal Model
 
-The core is a scoring model over demand, capacity, latency, risk, and weight. That keeps capability grants, restricted execution, and resource checks in one explicit decision path. The threshold is 153, with risk penalty 6, latency penalty 3, and weight bonus 5. The Lua project keeps the module shape simple and validates behavior through a direct script.
+The core code exposes a scoring path and the added review layer uses `signal`, `slack`, `drag`, and `confidence`. The domain terms are `capability width`, `resource pressure`, `plugin drift`, and `escape risk`.
 
-## Scenario Walkthrough
+The Lua implementation avoids hidden state so fixture changes are easy to reason about.
 
-The examples are meant to be readable before they are exhaustive. They cover enough variation to show how latency and risk can pull a decision below the threshold.
-
-## Main Behaviors
-
-- Uses fixture data to keep restricted execution changes visible in code review.
-- Includes extended examples for resource checks, including `surge` and `degraded`.
-- Documents plugin inputs tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
-
-## Run It Locally
-
-Clone the repository, enter the directory, and run the verifier. No database server, cloud account, or token is required.
-
-## Validation
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
-
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Repository Map
-
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-
-## Known Edges
-
-This code is local-first. It makes no claim about deployed usage and avoids credentials, hosted state, and environment-specific setup.
-
-## Follow-Up Work
-
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Split the scoring constants into a typed configuration object and validate it before use.
-- Add a comparison mode that shows how decisions change when one signal is adjusted.
-- Add one more sandbox fixture that focuses on a malformed or borderline input.
-
-## How To Run It
+## Try It Locally
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Validation
+
+That command is also the regression path. It verifies the domain cases and catches mismatches between the CSV, metadata, and code.
+
+## Scope
+
+The repository is intentionally scoped to local checks. I would expand it by adding adversarial fixtures before adding features.

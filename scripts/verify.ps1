@@ -56,3 +56,8 @@ foreach ($pathPattern in $knownPaths) {
 }
 
 lua tests/test_policy.lua
+
+
+lua tests/test_domain_review.lua
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-lualock-detail.ps1

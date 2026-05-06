@@ -1,0 +1,6 @@
+name,focus,signal,slack,drag,confidence,score,lane
+baseline,capability width,76,36,28,74,178,ship
+stress,resource pressure,47,29,17,64,136,watch
+edge,plugin drift,82,51,25,87,227,ship
+recovery,escape risk,63,35,28,55,132,watch
+stale,capability width,79,53,27,85,215,ship

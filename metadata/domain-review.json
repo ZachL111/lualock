@@ -1,0 +1,73 @@
+{
+  "repo": "lualock",
+  "language": "Lua",
+  "category": "Sandbox",
+  "goal": "Run capability-filtered plugins with deterministic resource policy checks.",
+  "review_model": {
+    "terms": [
+      "capability width",
+      "resource pressure",
+      "plugin drift",
+      "escape risk"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "capability width",
+      "signal": 76,
+      "slack": 36,
+      "drag": 28,
+      "confidence": 74,
+      "score": 178,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "resource pressure",
+      "signal": 47,
+      "slack": 29,
+      "drag": 17,
+      "confidence": 64,
+      "score": 136,
+      "lane": "watch"
+    },
+    {
+      "name": "edge",
+      "focus": "plugin drift",
+      "signal": 82,
+      "slack": 51,
+      "drag": 25,
+      "confidence": 87,
+      "score": 227,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "escape risk",
+      "signal": 63,
+      "slack": 35,
+      "drag": 28,
+      "confidence": 55,
+      "score": 132,
+      "lane": "watch"
+    },
+    {
+      "name": "stale",
+      "focus": "capability width",
+      "signal": 79,
+      "slack": 53,
+      "drag": 27,
+      "confidence": 85,
+      "score": 215,
+      "lane": "ship"
+    }
+  ]
+}
